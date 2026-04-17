@@ -9,5 +9,19 @@
     <div class="cheer-stick">
       <div class="glow-head"></div> <div class="handle"></div>    </div>
   </div>
+  <script>
+  const { ipcRenderer } = require('electron');
+  const container = document.querySelector('.cheer-stick');
+
+  // 메인 프로세스에서 보내는 신호를 듣습니다.
+  ipcRenderer.on('youtube-check', (event, title) => {
+    // 만약 영상 제목에 'NCT'가 포함되어 있다면 (현재는 예시로 항상 켬)
+    if (title.includes("NCT")) {
+      container.classList.add('party-mode');
+    } else {
+      container.classList.remove('party-mode');
+    }
+  });
+</script>
 </body>
 </html>
