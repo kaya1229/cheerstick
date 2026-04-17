@@ -10,36 +10,66 @@ body {
 }
 
 .character-container {
-  -webkit-app-region: drag; /* 캐릭터를 마우스로 드래그 가능하게 함 */
+  -webkit-app-region: drag; /* 캐릭터 드래그 가능 영역 */
   cursor: grab;
-}
-
-.cheer-stick {
+  /* 믐뭔봄의 각진 느낌을 살리기 위해 흔들림을 부드럽게 */
+  animation: wave 2.5s infinite ease-in-out;
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* 좌우로 흔들리는 애니메이션: 2초마다 무한 반복 */
-  animation: wave 2s infinite ease-in-out; 
 }
 
+/* 믐뭔봄 머리 (사각형 발광부) */
 .glow-head {
-  width: 70px;
+  width: 70px; /* 둥근 모양에서 사각형으로 변경 */
   height: 70px;
-  background: radial-gradient(circle, #ffffff, #ffee00);
-  border-radius: 50%;
-  box-shadow: 0 0 30px #ffee00, 0 0 60px rgba(255, 238, 0, 0.5);
+  /* 펄 네오 샴페인 색상 (연두색 계열) 그라데이션 */
+  background: linear-gradient(135deg, #d4ff00 0%, #aeff00 100%);
+  border-radius: 8px; /* 각진 느낌을 유지하되 아주 약간만 둥글게 */
+  
+  /* 강력한 네온광 효과 (이중 그림자) */
+  box-shadow: 
+    0 0 20px rgba(174, 255, 0, 0.7), 
+    0 0 50px rgba(174, 255, 0, 0.4);
+  
+  position: relative;
+  overflow: hidden;
 }
 
+/* 믐뭔봄 내부 로고 느낌 표현 (선택 사항) */
+.glow-head::after {
+  content: '';
+  position: absolute;
+  top: 15%; left: 15%; right: 15%; bottom: 15%;
+  border: 4px solid rgba(255, 255, 255, 0.8);
+  border-radius: 4px;
+  filter: blur(1px);
+}
+
+/* 응원봉 손잡이 */
 .handle {
-  width: 20px;
-  height: 80px;
-  background: #2c2c2c;
-  border-radius: 0 0 15px 15px;
-  margin-top: -5px;
+  width: 22px; /* 머리 크기에 맞춰 약간 두껍게 */
+  height: 90px;
+  background: #ffffff; /* 흰색 손잡이 */
+  border-radius: 0 0 10px 10px;
+  margin-top: -3px; /* 머리와 자연스럽게 연결 */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-/* 흔들리는 모션 정의 */
+/* 믐뭔봄 하단 스트랩 구멍 느낌 (디테일) */
+.handle::after {
+  content: '';
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px; height: 10px;
+  background: #e0e0e0;
+  border-radius: 3px;
+}
+
+/* 흔들리는 애니메이션 (이전과 동일) */
 @keyframes wave {
-  0%, 100% { transform: rotate(-8deg); }
-  50% { transform: rotate(8deg); }
+  0%, 100% { transform: rotate(-6deg); }
+  50% { transform: rotate(6deg); }
 }
