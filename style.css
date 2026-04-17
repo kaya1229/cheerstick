@@ -68,8 +68,21 @@ body {
   border-radius: 3px;
 }
 
+/* 기존 style.css 끝에 추가 */
+
+/* 특수 효과: 파티 모드 (NCT 영상 감지 시) */
+.party-mode .glow-head {
+  animation: neon-flash 0.2s infinite alternate;
+  background: linear-gradient(135deg, #d4ff00, #ffffff); /* 더 밝게! */
+}
+
+@keyframes neon-flash {
+  from { box-shadow: 0 0 20px #aeff00; transform: scale(1); }
+  to { box-shadow: 0 0 80px #ffffff, 0 0 120px #aeff00; transform: scale(1.1); }
+}
 /* 흔들리는 애니메이션 (이전과 동일) */
 @keyframes wave {
   0%, 100% { transform: rotate(-6deg); }
   50% { transform: rotate(6deg); }
 }
+
