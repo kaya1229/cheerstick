@@ -14,6 +14,33 @@ function createWindow() {
     }
   });
 
+const { app, BrowserWindow } = require('electron');
+
+let win;
+
+function createWindow() {
+  win = new BrowserWindow({
+    width: 300, height: 400,
+    transparent: true, frame: false, alwaysOnTop: true,
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false
+    }
+  });
+
+  win.loadFile('index.html');
+
+  // 유튜브 감시 타이머 (1초마다 실행)
+  setInterval(() => {
+    // 실제로는 창 목록을 가져오는 추가 모듈이 필요하지만, 
+    // 여기서는 개념적으로 '감지 시 메시지 전송' 로직을 넣습니다.
+    // 임시로 '특수 효과 모드'를 켜고 끄는 명령을 보냅니다.
+    win.webContents.send('youtube-check', "NCT"); 
+  }, 1000);
+}
+
+app.whenReady().then(createWindow);
+
   win.loadFile('index.html'); // 아래에서 만들 HTML 파일을 불러옵니다.
 }
 
@@ -23,3 +50,4 @@ app.whenReady().then(createWindow);
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit();
 });
+
